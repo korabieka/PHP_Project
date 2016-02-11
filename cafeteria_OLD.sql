@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
   `cid` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `cname` varchar(20) DEFAULT NULL,
+  `cname` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -54,8 +54,8 @@ DROP TABLE IF EXISTS `order_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_detail` (
-  `oid` int(10) unsigned NOT NULL,
-  `pid` int(10) unsigned NOT NULL,
+  `oid` int(10) unsigned NOT NULL DEFAULT '0',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0',
   `qty` int(11) DEFAULT NULL,
   `pamount` double DEFAULT NULL,
   PRIMARY KEY (`oid`,`pid`),
@@ -86,7 +86,7 @@ CREATE TABLE `orders` (
   `uid` int(10) unsigned DEFAULT NULL,
   `odate` date DEFAULT NULL,
   `notes` varchar(200) DEFAULT NULL,
-  `status` boolean,
+  `status` varchar(1) DEFAULT NULL,
   `totalamount` double DEFAULT NULL,
   PRIMARY KEY (`oid`),
   KEY `uid` (`uid`),
@@ -112,14 +112,14 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
   `pid` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `pname` varchar(20) NOT NULL,
+  `pname` varchar(200) NOT NULL,
   `price` double DEFAULT NULL,
-  `cid` int(10) unsigned DEFAULT NULL,
-  `imgname` varchar(20) DEFAULT NULL,
-  `available` boolean,
+  `pcategory` int(10) unsigned DEFAULT NULL,
+  `pic` varchar(100) DEFAULT NULL,
+  `available` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`pid`),
-  KEY `cid` (`cid`),
-  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`) ON DELETE CASCADE
+  KEY `pcategory` (`pcategory`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`pcategory`) REFERENCES `category` (`cid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -141,7 +141,7 @@ DROP TABLE IF EXISTS `room`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `room` (
   `rid` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `rname` varchar(20) DEFAULT NULL,
+  `rname` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -163,17 +163,17 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `uid` int unsigned NOT NULL AUTO_INCREMENT,
-  `uname` varchar(20) NOT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `password` char(32) DEFAULT NULL,
-  `imgname` varchar(25) DEFAULT NULL,
-  `rid` int unsigned DEFAULT NULL,
+  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uname` varchar(200) NOT NULL,
+  `email` varchar(300) DEFAULT NULL,
+  `password` varchar(300) DEFAULT NULL,
+  `image` varchar(200) DEFAULT NULL,
+  `admin` varchar(1) DEFAULT NULL,
+  `roomnum` int(10) unsigned DEFAULT NULL,
   `ext` int(11) DEFAULT NULL,
-  `admin` boolean DEFAULT FALSE,
   PRIMARY KEY (`uid`),
-  KEY `rid` (`rid`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `room` (`rid`) ON DELETE CASCADE
+  KEY `roomnum` (`roomnum`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`roomnum`) REFERENCES `room` (`rid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
