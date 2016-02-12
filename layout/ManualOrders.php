@@ -1,3 +1,12 @@
+<?php
+  require_once("../include/dbconnection.php");
+  $dbobj = new dbconnection();
+  session_start();
+  $_SESSION['uid'] = $_GET['uid'];
+  $users = $dbobj->SelectColumn('uname','user',null,null);
+  $rooms = $dbobj->SelectColumn('rname','room',null,null);
+?>
+
 <!DOCTYPE html> 
 <html lang="en">
 <head>
@@ -59,6 +68,7 @@
         <div class="form-group">
         <label class="control-label col-sm-2" for="room">Room</label>
         <select class="form-control col-sm-10">
+          <?php foreach($rooms as $room) echo "<option value='$room'>$room </option>"?>
         </select>
         </div>
         <hr>
@@ -77,11 +87,7 @@
       <label>Add To User</label>
       <br>
       <select class="form-control">
-    <option value="one">One</option>
-    <option value="two">Two</option>
-    <option value="three">Three</option>
-    <option value="four">Four</option>
-    <option value="five">Five</option>
+        <?php foreach($users as $user) echo "<option value='$user'>$user </option>"?>
     </select>
     <hr>
     <div class="col-lg-12 table-responsive" style="border:1px solid black">

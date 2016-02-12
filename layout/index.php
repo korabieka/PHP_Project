@@ -1,5 +1,7 @@
 <?php
-    
+    // $_DOCUMENT_ROOT = $_SERVER['document_root'];
+    // echo $_DOCUMENT_ROOT;
+    $_login_controller = "../controller/login.php";
 ?>
 
 <!DOCTYPE html>
@@ -14,16 +16,17 @@
 <hr>
 
 <div class="container">
-        <div class="row">
-            <div class="col-md-12 well">
-                <h1 class="col-md-4">Login</h1>
-                    <div class="col-md-6"></div>
-            </div>
+    <div class="row">
+        <div class="col-md-12 well">
+            <h1 class="col-md-4">Login</h1>
+            <div class="col-md-6"></div>
         </div>
     </div>
+</div>
 
 <div class="container">
-    <form role="form" method="post" id="frm" action="admin.php">
+    <form role="form" method="post" id="frm" action="<?php echo $_login_controller ?>">
+    <!-- <form role="form" method="post" id="frm" action="login_.php"> -->
         <div class="form-group">
             <label class="col-md-2">Username or email:</label>
             <input class="col-md-10" type="text" class="form-control" id="username" name="username" placeholder="Type your username or email">

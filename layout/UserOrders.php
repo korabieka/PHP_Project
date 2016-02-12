@@ -1,6 +1,9 @@
 <?php
 require_once("../include/dbconnection.php");
 $dbobj = new dbconnection();
+$rooms = $dbobj->SelectColumn('rname','room',null,null);
+session_start();
+$_SESSION['uid'] = $_GET['uid'];
 ?>
 <!DOCTYPE html> 
 <html lang="en">
@@ -61,6 +64,7 @@ $dbobj = new dbconnection();
         <div class="form-group">
         <label class="control-label col-sm-2" for="room">Room</label>
         <select class="form-control col-sm-10">
+          <?php foreach($rooms as $room) echo "<option value='$room'>$room </option>"?>
         </select>
         </div>
         <hr>
