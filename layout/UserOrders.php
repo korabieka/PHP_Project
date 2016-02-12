@@ -1,3 +1,7 @@
+<?php
+require_once("../include/dbconnection.php");
+$dbobj = new dbconnection();
+?>
 <!DOCTYPE html> 
 <html lang="en">
 <head>
@@ -43,9 +47,11 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-5" style="border:1px solid black" id="orders"> <!--Div For Orders-->
+    <div class="col-lg-5" style="" id="orders"> <!--Div For Orders-->
         <form role="form" method="" class="form-horizontal">
-          <hr>
+	<!--quantity w kda-->          
+
+	<hr>
       <div class="form-group">
         <label class="control-label col-sm-2" for="notes">Notes</label>
         </div>
@@ -73,15 +79,41 @@
     <div class="col-lg-7">
       <label>Latest Order</label>
       <br>
-      <div class="col-lg-12" style="border:1px solid black">
+      <div class="col-lg-12">
         <table class="table table-striped">
-        <!--latest order-->
+        <?php
+	$imgCounter=0;
+	$result = $dbobj->Select("select pname,imgname from product,orders,order_detail where product.pid=order_detail.pid and orders.oid=order_detail.oid and orders.uid='".$_SESSION['uid']."' order by odate desc limit 1");
+	for($i=0;$i<count($result);$i++){
+	if($imgCounter==0){echo "<tr>";}
+		if($imgCounter!=2){
+	echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td>";
+		$imgCounter++;		
+		}elseif($imgCounter==2){
+			echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td></tr>";
+			$imgCounter=0;
+		}	
+	}	
+	?>
       </table>
       </div>
     <hr>
-    <div class="col-lg-12 table-responsive" style="border:1px solid black">
+    <div class="col-lg-12 table-responsive">
       <table class="table table-striped">
-      <!--Menu-->
+      <?php
+	$imgCounter=0;
+	$result = $dbobj->Select("select * from product where available=1");
+	for($i=0;$i<count($result);$i++){
+	if($imgCounter==0){echo "<tr>";}
+		if($imgCounter!=2){
+	echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td>";
+		$imgCounter++;		
+		}elseif($imgCounter==2){
+			echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td></tr>";
+			$imgCounter=0;
+		}	
+	}	
+	?>
       </table>
     </div>
     </div>
