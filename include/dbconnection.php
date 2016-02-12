@@ -2,8 +2,8 @@
     class dbconnect{
         static $db;
         static $host = "localhost";
-        static $username = "ashour";
-        static $password = "hussien660";
+        static $username = "root";
+        static $password = "1232102512";
         static $dbname = "CAFETERIA";
         private function __construct(){}
 
@@ -24,11 +24,13 @@
         }
 
         function SelectColumn($colname,$tblname,$attrname,$val){
-            $query = "select `$colname` from `$tblname` where `$attrname`=$val";
+            if($attrname == null)
+                $query = "select `$colname` from `$tblname`";
+            else
+                $query = "select `$colname` from `$tblname` where `$attrname`='$val'";
             $res = $this->Select($query);
             if($res == false){
-                echo "ERROR";
-                exit;
+                return array();
             }
             $strArr = array();
             foreach ($res as $str) {
