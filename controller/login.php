@@ -3,6 +3,7 @@
 	$_user_order = "../layout/UserOrders.php";
 	error_reporting(E_ALL);
     ini_set('display_errors', 1);
+    session_start();
 	require_once("../include/dbconnection.php");
 	$dbobj = new dbconnection();
 	
@@ -10,7 +11,7 @@
 	$crrpwd = md5(trim($_POST['pwd']));
 
 	$users = $dbobj->SelectColumn('uname','user',null,null);
-	print_r($users);
+	
 
 	$uflag = false;
 	foreach($users as $uname)
@@ -31,7 +32,7 @@
 		echo "Passwords did not match";
 		exit;
 	}
-
+	$_SESSION['uid'] = $urecord['uid'];
 	if($urecord['admin'])
 		header("location:".$_admin_order."?uid=".$urecord['uid']);
 	else

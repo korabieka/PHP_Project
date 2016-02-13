@@ -3,15 +3,20 @@
     ini_set('display_errors', 1);
     require_once("../include/dbconnection.php");
     $dbobj = new dbconnection();
-
+    session_start();
+    $uid = $_SESSION['uid'];
     $_products_img = "../images/product/";
+    $_users_img = "../images/user/";
 
     $productsArr = $dbobj->Select("select `pid`,`pname`,`price`,`imgname`,`available` from `product`");
 
     $_controller = "../controller/";
     $_layout = "../layout/";
     $_add_product = "../layout/add_product.php";
-
+    $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
+	$uname = $uname[0];
+	$img = $_users_img.$uname.".jpeg";
+    include("common/header.php");
 ?>
 <html>
 <head>

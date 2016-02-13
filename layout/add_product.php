@@ -3,7 +3,13 @@
 	require_once("../include/dbconnection.php");
 	$dbobj = new dbconnection();
 	session_start();
+	//$uid = $_GET['uid'];
+  	$uid = $_SESSION['uid'];
 	$categories = $dbobj->SelectColumn('cname','category',null,null);
+	$uname = $dbobj->SelectColumn('uname','user','uid',$uid);
+	$uname = $uname[0];
+	$img = "img/users/".$uname.".jpeg";
+	include("common/header.php");
 ?>
 <html>
 <head>

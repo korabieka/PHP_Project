@@ -1,3 +1,17 @@
+<?php
+
+	$_user_controller = "../controller/add_user.php";
+	require_once("../include/dbconnection.php");
+	$dbobj = new dbconnection();
+	session_start();
+	//$uid = $_GET['uid'];
+  	$uid = $_SESSION['uid'];
+	// $categories = $dbobj->SelectColumn('cname','category',null,null);
+	$uname = $dbobj->SelectColumn('uname','user','uid',$uid);
+	$uname = $uname[0];
+	$img = "img/users/".$uname.".jpeg";
+	include("common/header.php");
+?>
 <html>
 <head>
 	<title></title>
@@ -14,8 +28,8 @@
 	</div>
 
 
-	<div class="container">
-	    <form role="form" method="post" id="frm" action='#' enctype="multipart/form-data" enctype="multipart/form-data">
+	<div class="container">		
+	    <form role="form" method="post" id="frm" action="<?php echo $_user_controller ?>" enctype="multipart/form-data">
 	        <div class="form-group">
 	            <label class="col-md-2">First Name :</label>
 	            <input class="col-md-10" type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
@@ -49,10 +63,15 @@
 	            <input name="ext" class="col-md-10" type="text" class="form-control" id="ext" placeholder="Enter your extension number">
 	        </div>
 	        <div class="form-group">
-	            <label class="col-md-2" for="pwd">Profile image :</label>
+	            <label class="col-md-2" for="pimg">Profile image :</label>
 	            <input class="col-md-10" type="file" name="fileToUpload" id="fileToUpload">
 	        </div>
 	        <div class="row">&nbsp;</div>
+	        <div class="form-group">
+	        	<label class="col-md-2" for="type">Acoount Type :</label>
+	        	<label class="radio-inline"><input type="radio" name="suser" value="true">Admin</label>
+				<label class="radio-inline"><input type="radio" name="suser" value="false">Regular</label>
+	        </div>
 	        <div class="col-md-offset-2 row">
 	        	<input type="hidden" name="direction" value="register"/>
 	        	<input type="submit" class="col-md-2 btn btn-primary" value="Submit">

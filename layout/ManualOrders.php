@@ -2,12 +2,17 @@
   require_once("../include/dbconnection.php");
   $dbobj = new dbconnection();
   session_start();
-  $_SESSION['uid'] = $_GET['uid'];
+  $uid = $_GET['uid'];
+  $_SESSION['uid'] = $uid;
   $users = $dbobj->SelectColumn('uname','user',null,null);
   $rooms = $dbobj->SelectColumn('rname','room',null,null);
+  $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
+  $uname = $uname[0];
+  $img = "img/users/".$uname.".jpeg";
+  include("common/header.php");
 ?>
 
-<!DOCTYPE html> 
+<!DOCTYPE h<!-- <!-- <!-- tml> 
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -20,7 +25,7 @@
 </head>
 <body>
 <!--Header-->
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Cafeteria</a>
@@ -39,7 +44,7 @@
 	</ul>
 	</div>  
   </div>
-</nav>
+</nav> -->
 <!--Body-->
 <div class="container">
   <div class="row">

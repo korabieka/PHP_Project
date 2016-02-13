@@ -23,6 +23,21 @@
             $this->db = dbconnect::CreateDatabaseResource();
         }
 
+        function getRoomId($rname){
+            $rid = $this->SelectColumn('rid','room','rname',$rname);
+            return $rid[0];
+        }
+
+        function getActiveUsersRecords(){
+            $arr = $this->Select("select `uname`,`email`,`imgname`,`rid`,`ext`,`active` from `user`");
+            $userArr = array();
+            foreach ($arr as $row){                
+                if($row['active'])
+                    array_push($userArr, $row);
+            }
+            return $userArr;
+        }
+
         function SelectColumn($colname,$tblname,$attrname,$val){
             if($attrname == null)
                 $query = "select `$colname` from `$tblname`";
@@ -38,6 +53,7 @@
             }
             return $strArr;
         }
+        
 
         function Select($query){
             $res = mysqli_query($this->db,$query);

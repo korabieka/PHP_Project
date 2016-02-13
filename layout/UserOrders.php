@@ -1,9 +1,14 @@
 <?php
-require_once("../include/dbconnection.php");
-$dbobj = new dbconnection();
-$rooms = $dbobj->SelectColumn('rname','room',null,null);
-session_start();
-$_SESSION['uid'] = $_GET['uid'];
+  require_once("../include/dbconnection.php");
+  $dbobj = new dbconnection();
+  $rooms = $dbobj->SelectColumn('rname','room',null,null);
+  session_start();
+  $uid = $_GET['uid'];
+  $_SESSION['uid'] = $uid;
+  $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
+  $uname = $uname[0];
+  $img = "img/users/".$uname.".jpeg";
+  include("common/header.php");
 ?>
 <!DOCTYPE html> 
 <html lang="en">
@@ -18,7 +23,7 @@ $_SESSION['uid'] = $_GET['uid'];
 </head>
 <body>
 <!--Header-->
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Cafeteria</a>
@@ -34,7 +39,7 @@ $_SESSION['uid'] = $_GET['uid'];
 	</ul>
 	</div>  
   </div>
-</nav>
+</nav> -->
 <!--Body-->
 <div class="container">
   <div class="row">
@@ -139,10 +144,10 @@ $_SESSION['uid'] = $_GET['uid'];
 
 </div>
 <!--Footer-->
-<div class="navbar navbar-fixed-bottom" role="navigation">
+<!-- <div class="navbar navbar-fixed-bottom" role="navigation">
 <div class="navbar-text center-block">
 <div><h4>Copy rights reserved for Eagles Team</h4></div>
 </div>
-</div>
+</div> -->
 </body>
 </html>

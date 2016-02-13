@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.47, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.14  Distrib 5.5.44-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: CAFETERIA
 -- ------------------------------------------------------
--- Server version	5.5.47-0ubuntu0.14.04.1
+-- Server version	5.5.44-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,7 +34,7 @@ CREATE TABLE `category` (
   `cid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cname` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,6 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'beverage'),(2,'hot'),(3,'mixed');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +86,7 @@ CREATE TABLE `orders` (
   `uid` int(10) unsigned DEFAULT NULL,
   `odate` date DEFAULT NULL,
   `notes` varchar(200) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
+  `status` boolean,
   `totalamount` double DEFAULT NULL,
   PRIMARY KEY (`oid`),
   KEY `uid` (`uid`),
@@ -117,11 +116,11 @@ CREATE TABLE `product` (
   `price` double DEFAULT NULL,
   `cid` int(10) unsigned DEFAULT NULL,
   `imgname` varchar(20) DEFAULT NULL,
-  `available` tinyint(1) DEFAULT NULL,
+  `available` boolean,
   PRIMARY KEY (`pid`),
   KEY `cid` (`cid`),
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +129,6 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (25,'coffee',8,2,'coffee.jpeg',0);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +143,7 @@ CREATE TABLE `room` (
   `rid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `rname` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +152,6 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'1929'),(2,'1696');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,21 +163,18 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int unsigned NOT NULL AUTO_INCREMENT,
   `uname` varchar(20) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` char(32) DEFAULT NULL,
   `imgname` varchar(25) DEFAULT NULL,
-  `rid` int(10) unsigned DEFAULT NULL,
+  `rid` int unsigned DEFAULT NULL,
   `ext` int(11) DEFAULT NULL,
-  `admin` tinyint(1) DEFAULT '0',
-  `fname` varchar(20) DEFAULT NULL,
-  `lname` varchar(20) DEFAULT NULL,
-  `active` tinyint(1) DEFAULT '1',
+  `admin` boolean DEFAULT FALSE,
   PRIMARY KEY (`uid`),
   KEY `rid` (`rid`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `room` (`rid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +183,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'hussain','hussain@ashour.com','e10adc3949ba59abbe56e057f20f883e','hussain.jpeg',2,1369,0,NULL,NULL,1),(11,'sara','sara@sara.com','e10adc3949ba59abbe56e057f20f883e','sara.jpeg',1,12,0,'sara','sara',1),(14,'doubleo','omar@omar.com','e10adc3949ba59abbe56e057f20f883e','doubleo.jpeg',1,12,0,'Omar','Osama',1),(16,'asmaa','asmaa@asmaa.com','e10adc3949ba59abbe56e057f20f883e','asmaa.jpeg',1,12,0,'asmaa','asmaa',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -202,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-14  1:28:28
+-- Dump completed on 2016-02-10 10:36:11
