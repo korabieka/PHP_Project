@@ -60,8 +60,6 @@
 	        exit;
 	    }
 	}
-	echo "before";
 	$dbobj->Insert("insert into `product` values(null,'$pname','$price','$cid','$imgname',true)");
-	echo "after";
 	header("location:".$_product."?uid=".$uid);
 ?> 
