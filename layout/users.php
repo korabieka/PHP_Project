@@ -10,13 +10,10 @@
 		exit;
 	}
     $uid = $_SESSION['uid'];
-    echo $uid;
     $_users_img = "../images/user/";
     $usersArr = $dbobj->getActiveUsersRecords();    
     $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
-    print_r($uname);
 	$uname = $uname[0];
-	echo $uname;
 
 
     $_controller = "../controller/";
@@ -65,7 +62,8 @@
 	    			echo "<td>".$row['rid']."</td>";
 	    			$imgpath = $_users_img.$row['imgname'];
 	    			echo "<td><img src='$imgpath' width='80' heigth='80'></img></td>";
-	    			echo "<td>".$row['ext']."</td>";	    			
+	    			echo "<td>".$row['ext']."</td>";
+	    			$uid = $row['uid'];
 	    			echo "<td><a href='$_controller/edit_user.php?uid=$uid'>Edit</a>&nbsp;|&nbsp;<a href='$_controller/delete_user.php?uid=$uid'>Delete</a></td>";
 	    		}
 	    	?>

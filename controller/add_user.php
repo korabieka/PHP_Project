@@ -1,8 +1,8 @@
 <?php
 	error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    require_once("../include/Validation.php");
-    require_once("../include/dbconnection.php");
+    require_once("../include/Validation.php"); // deconnection already included in Validation
+    // require_once("../include/dbconnection.php");
     
     session_start();
 	$dbobj = new dbconnection();
@@ -11,8 +11,12 @@
 		echo "You are not authoriezed to enter this page. You have to login first";
 		exit;
 	}
-    $uid = $_SESSION['uid'];
-    echo "uid is : ".$uid;
+	$uid = $_SESSION['uid'];
+    if(!$vobj->ifSuperUserId($uid)){
+    	echo "You are not authoriezed to enter this page. Only for admins.";
+    	exit;
+    }
+
 	$_user = "../layout/users.php";
     
     $fname = $_POST['fname'];
@@ -24,7 +28,6 @@
 	$rnum = $_POST['rnum'];
 	$ext = $_POST['ext'];
 	$suser = $_POST['suser'];
-
 	if($vobj->ifUserExists($uname)){
 		echo "User already exists";
 		exit;
@@ -93,7 +96,9 @@
 
 
 	$hpwd = md5($pwd);
-	$dbobj->Insert("insert into user values(null,'$uname','$email','$hpwd','$imgname','$rid','$ext','$suser','$fname','$lname',true)");
-	
+	if($suser)
+		$dbobj->Insert("insert into user values(null,'$uname','$email','$hpwd','$imgname',1,'$ext','$suser','$fname','$lname',true)");
+	// else
+
 	header("location:".$_user."?uid=".$uid);	    
 ?>1

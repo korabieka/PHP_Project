@@ -4,23 +4,14 @@
 	error_reporting(E_ALL);
     ini_set('display_errors', 1);
     session_start();
-	require_once("../include/dbconnection.php");
+	require_once("../include/Validation.php"); // deconnection already included in Validation
 	$dbobj = new dbconnection();
-	
+	$vobj = new Validation();
+
 	$crruname = trim($_POST['username']);
 	$crrpwd = md5(trim($_POST['pwd']));
 
-	$users = $dbobj->SelectColumn('uname','user',null,null);
-	
-
-	$uflag = false;
-	foreach($users as $uname)
-		if($crruname == $uname){
-			$uflag = true;
-			break;
-		}
-
-	if(!$uflag){
+	if(!$vobj->ifUserExists($crruname)){
 		echo "User not found";
 		exit;
 	}
@@ -32,6 +23,7 @@
 		echo "Passwords did not match";
 		exit;
 	}
+	
 	$_SESSION['uid'] = $urecord['uid'];
 	if($urecord['admin'])
 		header("location:".$_admin_order."?uid=".$urecord['uid']);

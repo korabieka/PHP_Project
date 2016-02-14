@@ -1,10 +1,21 @@
 <?php
 	error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    require_once("../include/dbconnection.php");
+    // require_once("../include/dbconnection.php");
+    require_once("../include/Validation.php"); // deconnection already included in Validation
     $dbobj = new dbconnection();
+    $vobj = new Validation();
     session_start();
-    $uid = $_SESSION['uid'];
+    if(!isset($_SESSION['uid'])){
+		echo "You are not authoriezed to enter this page. You have to login first";
+		exit;
+	}
+	$uid = $_SESSION['uid'];
+    if(!$vobj->ifSuperUserId($uid)){
+    	echo $uid."<br>";
+    	echo "You are not authoriezed to enter this page. Only for admins.";
+    	exit;
+    }
     $_products_img = "../images/product/";
     $_users_img = "../images/user/";
 

@@ -3,8 +3,7 @@
   $dbobj = new dbconnection();
   $rooms = $dbobj->SelectColumn('rname','room',null,null);
   session_start();
-  $uid = $_GET['uid'];
-  $_SESSION['uid'] = $uid;
+  $uid = $_SESSION['uid'];
   $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
   $uname = $uname[0];
   $img = "img/users/".$uname.".jpeg";

@@ -2,8 +2,8 @@
   require_once("../include/dbconnection.php");
   $dbobj = new dbconnection();
   session_start();
-  $uid = $_GET['uid'];
-  $_SESSION['uid'] = $uid;
+  $uid = $_SESSION['uid'];
+  // $_SESSION['uid'] = $uid;
   $users = $dbobj->SelectColumn('uname','user',null,null);
   $rooms = $dbobj->SelectColumn('rname','room',null,null);
   $uname = $dbobj->SelectColumn('uname','user','uid',$uid);

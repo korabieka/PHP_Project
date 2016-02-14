@@ -5,14 +5,17 @@
 
 		public $dbobj;
 		public $susers;
+		public $susersid;
 		public $users;
+
 		public $emails;
 		public $rooms;
 		public $exts;
 
 		function __construct(){
 			$this->dbobj = new dbconnection();
-			$this->susers = $this->dbobj->SelectColumn('uname','user','admin','true');
+			$this->susers = $this->dbobj->SelectColumn('uname','user','admin',true);
+			$this->susersid = $this->dbobj->SelectColumn('uid','user','admin',true);
 			$this->users = $this->dbobj->SelectColumn('uname','user',null,null);
 			$this->emails = $this->dbobj->SelectColumn('email','user',null,null);
 			$this->rooms = $this->dbobj->SelectColumn('rname','room',null,null);
@@ -22,6 +25,13 @@
 		function ifUserExists($uname){
 			foreach($this->users as $user)
 				if($uname == $user)
+					return true;
+			return false;
+		}
+
+		function ifSuperUserId($uid){
+			foreach($this->susersid as $suserid)
+				if($uid == $suserid)
 					return true;
 			return false;
 		}

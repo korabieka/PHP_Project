@@ -56,6 +56,7 @@
 		    </div> -->
 		    <br>
 		    <div class="col-md-offset-2 row">
+		    	<input type="hidden" name="pid" class="col-md-offet-2 btn btn-success" value="<?php echo $pid ?>">
 	        	<input type="submit" class="col-md-offet-2 btn btn-success" value="Edit">
 	        	<input type="reset" class="col-md-offset-2 btn btn-danger" value="reset">
 	        </div>

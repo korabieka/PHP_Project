@@ -29,7 +29,7 @@
         }
 
         function getActiveUsersRecords(){
-            $arr = $this->Select("select `uname`,`email`,`imgname`,`rid`,`ext`,`active` from `user`");
+            $arr = $this->Select("select `uid`,`uname`,`email`,`imgname`,`rid`,`ext`,`active` from `user`");
             $userArr = array();
             foreach ($arr as $row){                
                 if($row['active'])
@@ -91,6 +91,10 @@
                 echo "ERROR";
                 exit;
             }
+        }
+
+        function getError() {
+            return "Standard Message: " . $db->getMessage() . "Standard Code: " . $db->getCode() . "DBMS/User Message: ". $db->getUserInfo() . "DBMS/Debug Message: " . $db->getDebugInfo();
         }
     }
 ?>
