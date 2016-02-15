@@ -18,7 +18,7 @@
 
 	$pid = $_GET['pid'];
 
-	$dbobj->Delete("delete from `product` where `pid`='$pid'");
+	$dbobj->Update("update product set `active`=false where `pid`='$pid'");
 	header("location:".$_product."?uid=".$uid);
 
 ?>

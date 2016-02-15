@@ -121,7 +121,7 @@ CREATE TABLE `product` (
   PRIMARY KEY (`pid`),
   KEY `cid` (`cid`),
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (25,'coffee',8,2,'coffee.jpeg',0);
+INSERT INTO `product` VALUES (25,'mokka',15,1,'coffee.jpeg',1),(28,'coffe',10,3,'coffe.jpeg',1);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +180,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`uid`),
   KEY `rid` (`rid`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `room` (`rid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +189,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'hussain','hussain@ashour.com','e10adc3949ba59abbe56e057f20f883e','hussain.jpeg',2,1369,0,NULL,NULL,1),(11,'sara','sara@sara.com','e10adc3949ba59abbe56e057f20f883e','sara.jpeg',1,12,0,'sara','sara',1),(14,'doubleo','omar@omar.com','e10adc3949ba59abbe56e057f20f883e','doubleo.jpeg',1,12,0,'Omar','Osama',1),(16,'asmaa','asmaa@asmaa.com','e10adc3949ba59abbe56e057f20f883e','asmaa.jpeg',1,12,0,'asmaa','asmaa',1);
+INSERT INTO `user` VALUES (14,'doubleo','omar@omar.com','e10adc3949ba59abbe56e057f20f883e','doubleo.jpeg',1,12,1,'Omar','Osama',1),(16,'asmaa','asmaa@asmaa.com','e10adc3949ba59abbe56e057f20f883e','asmaa.jpeg',1,12,0,'asmaa','asmaa',1),(18,'sara','sara@sara.com','e10adc3949ba59abbe56e057f20f883e','sara.jpeg',1,12,0,'sara','sara',1),(19,'halawany','hany@hany.com','e10adc3949ba59abbe56e057f20f883e','halawany.png',1,12,0,'hany','hany',1),(20,'mk','khaled@khaled.com','e10adc3949ba59abbe56e057f20f883e','mk.jpeg',1,12,0,'mk','mk',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -202,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-14  1:28:28
+-- Dump completed on 2016-02-14 22:31:13

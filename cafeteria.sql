@@ -87,7 +87,7 @@ CREATE TABLE `orders` (
   `uid` int(10) unsigned DEFAULT NULL,
   `odate` date DEFAULT NULL,
   `notes` varchar(200) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `totalamount` double DEFAULT NULL,
   PRIMARY KEY (`oid`),
   KEY `uid` (`uid`),
@@ -118,6 +118,7 @@ CREATE TABLE `product` (
   `cid` int(10) unsigned DEFAULT NULL,
   `imgname` varchar(20) DEFAULT NULL,
   `available` tinyint(1) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`pid`),
   KEY `cid` (`cid`),
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`) ON DELETE CASCADE
@@ -130,7 +131,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (25,'mokka',15,1,'coffee.jpeg',1),(28,'coffe',10,3,'coffe.jpeg',1);
+INSERT INTO `product` VALUES (28,'tea',5,2,'coffe.jpeg',1,1);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +181,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`uid`),
   KEY `rid` (`rid`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `room` (`rid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +190,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (14,'doubleo','omar@omar.com','e10adc3949ba59abbe56e057f20f883e','doubleo.jpeg',1,12,1,'Omar','Osama',1),(16,'asmaa','asmaa@asmaa.com','e10adc3949ba59abbe56e057f20f883e','asmaa.jpeg',1,12,0,'asmaa','asmaa',1),(18,'sara','sara@sara.com','e10adc3949ba59abbe56e057f20f883e','sara.jpeg',1,12,0,'sara','sara',1),(19,'halawany','hany@hany.com','e10adc3949ba59abbe56e057f20f883e','halawany.png',1,12,0,'hany','hany',1),(20,'mk','khaled@khaled.com','e10adc3949ba59abbe56e057f20f883e','mk.jpeg',1,12,0,'mk','mk',1);
+INSERT INTO `user` VALUES (2,'salama','salama@salama.com','e10adc3949ba59abbe56e057f20f883e','asmaa.jpeg',2,12,0,'asmaa','asmaa',NULL),(14,'doubleo','omar@omar.com','e10adc3949ba59abbe56e057f20f883e','doubleo.jpeg',1,12,1,'Omar','Osama',1),(18,'sara','sara@sara.com','e10adc3949ba59abbe56e057f20f883e','sara.jpeg',1,12,0,'sara','sara',1),(19,'halawany','hany@hany.com','e10adc3949ba59abbe56e057f20f883e','halawany.png',1,12,0,'hany','hany',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -202,4 +203,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-14 22:31:13
+-- Dump completed on 2016-02-16  0:06:04

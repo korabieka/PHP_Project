@@ -3,13 +3,16 @@
   $dbobj = new dbconnection();
   $rooms = $dbobj->SelectColumn('rname','room',null,null);
   session_start();
-  $uid = $_SESSION['uid'];
+  if(!isset($_SESSION['uid'])){
+    echo "You are not authoriezed to enter this page. You have to login first";
+    exit;
+  }
   $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
   $uname = $uname[0];
   $imgname = $dbobj->SelectColumn('imgname','user','uid',$uid);
   $imgname = $imgname[0];
   $img = "../images/user/".$imgname;
-  include("common/header.php");
+  include("common/regheader.php");
 ?>
 <!DOCTYPE html> 
 <html lang="en">
@@ -18,9 +21,6 @@
 	<title>Bootstrap</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<script src="js/jquery-1.11.2.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-  <script src="js/ManualOrders.js"></script>
 </head>
 <body>
 <!--Header-->
@@ -109,7 +109,7 @@
       </div>
     <hr>
     <div class="col-lg-12 table-responsive">
-      <table class="table table-striped">
+      <table id="drinksTbl" class="table table-striped">
       <?php
 	$imgCounter=0;
 	$result = $dbobj->Select("select * from product where available=1");
@@ -150,5 +150,8 @@
 <div><h4>Copy rights reserved for Eagles Team</h4></div>
 </div>
 </div> -->
+<script src="js/jquery-1.11.2.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/userOrders.js"></script>
 </body>
 </html>

@@ -24,7 +24,9 @@
 	}
 
 	echo "before";
-	$dbobj->Delete("delete from `user` where `uid`='$duid'");
+	// $dbobj->Delete("delete from `user` where `uid`='$duid'");
+	$dbobj->Update("update user set `active`=false where `uid`='$duid'");
+
 	echo "after";
 	header("location:".$_user."?uid=".$uid);
 

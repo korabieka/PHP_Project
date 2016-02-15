@@ -1,8 +1,7 @@
 <?php
-  $_home = "ManualOrders.php?";
-  $_products = "products.php";
-  $_users = "users.php";
+  $_home = "UserOrders.php";
   $_logout = "../controller/logout.php";
+  // $_orders = "ManualOrders.php?";
   $_checks = "";
 ?>
 
@@ -25,20 +24,18 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="<?php echo $_home ?>">Home</a></li>
-      <li><a href="<?php echo $_products ?>">Products</a></li> 
-      <li><a href="<?php echo $_users ?>">Users</a></li>
-      <li><a href="#">Checks</a></li> 
+      <!-- <li><a href="<?php echo $_orders ?>">Manual Orders</a></li> -->
     </ul>
     <div style="float:right">
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav img-responsive">
     <li><img src="<?php echo $img ?>" width="60px" height="50px"/></li>
     <li><a href="#"><?php echo $uname ?></a></li>
     <li><a href="<?php echo $_logout ?>" >Logout</a></li>
-    
-	</ul>
-	</div>  
+  </ul>
+  </div>  
   </div>
 </nav>
+
 <!--Body-->
 <div class="container">
 

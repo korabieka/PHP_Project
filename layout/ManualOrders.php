@@ -1,7 +1,13 @@
 <?php
-  require_once("../include/dbconnection.php");
+  require_once("../include/Validation.php"); // deconnection already included in Validation
   $dbobj = new dbconnection();
+  $vobj = new Validation();
   session_start();
+  //$uid = $_GET['uid'];
+  if(!isset($_SESSION['uid'])){
+    echo "You are not authoriezed to enter this page. You have to login first";
+    exit;
+  }
   $uid = $_SESSION['uid'];
   // $_SESSION['uid'] = $uid;
   $users = $dbobj->SelectColumn('uname','user',null,null);

@@ -28,8 +28,18 @@
             return $rid[0];
         }
 
+        function getActiveProductsRecords(){
+            $arr = $this->Select("select `pid`,`pname`,`price`,`imgname`,`available`,`active` from `product`");
+            $userArr = array();
+            foreach ($arr as $row){                
+                if($row['active'])
+                    array_push($userArr, $row);
+            }
+            return $userArr;
+        }
+
         function getActiveUsersRecords(){
-            $arr = $this->Select("select `uid`,`uname`,`email`,`imgname`,`rid`,`ext`,`active` from `user`");
+            $arr = $this->Select("select `uid`,`uname`,`email`,`imgname`,`rid`,`ext`,`active`,`admin` from `user`");
             $userArr = array();
             foreach ($arr as $row){                
                 if($row['active'])

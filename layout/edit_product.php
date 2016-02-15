@@ -1,8 +1,18 @@
 <?php
-	$_product_controller = "../controller/add_product.php";
-	require_once("../include/dbconnection.php");
+	require_once("../include/Validation.php"); // deconnection already included in Validation
 	$dbobj = new dbconnection();
+	$vobj = new Validation();
 	session_start();
+	//$uid = $_GET['uid'];
+	if(!isset($_SESSION['uid'])){
+		echo "You are not authoriezed to enter this page. You have to login first";
+		exit;
+	}
+  	$uid = $_SESSION['uid'];
+  	if(!$vobj->ifSuperUserId($uid)){
+    	echo "You are not authoriezed to enter this page. Only for admins.";
+    	exit;
+    }
 	$pid = $_GET['pid'];
 	$categories = $dbobj->SelectColumn('cname','category',null,null);
 	$pro_rec = $dbobj->Select("select `pname`,`price`,`cid`,`imgname` from product where `pid`='$pid'");
