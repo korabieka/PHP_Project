@@ -8,11 +8,13 @@
   $rooms = $dbobj->SelectColumn('rname','room',null,null);
   $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
   $uname = $uname[0];
-  $img = "img/users/".$uname.".jpeg";
+  $imgname = $dbobj->SelectColumn('imgname','user','uid',$uid);
+  $imgname = $imgname[0];
+  $img = "../images/user/".$imgname;
   include("common/header.php");
 ?>
 
-<!DOCTYPE h<!-- <!-- <!-- tml> 
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 	<meta charset="UTF-8">

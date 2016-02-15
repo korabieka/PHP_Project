@@ -6,7 +6,9 @@
   $uid = $_SESSION['uid'];
   $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
   $uname = $uname[0];
-  $img = "img/users/".$uname.".jpeg";
+  $imgname = $dbobj->SelectColumn('imgname','user','uid',$uid);
+  $imgname = $imgname[0];
+  $img = "../images/user/".$imgname;
   include("common/header.php");
 ?>
 <!DOCTYPE html> 
@@ -95,10 +97,10 @@
 	for($i=0;$i<count($result);$i++){
 	if($imgCounter==0){echo "<tr>";}
 		if($imgCounter!=2){
-	echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td>";
+	echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td>";
 		$imgCounter++;		
 		}elseif($imgCounter==2){
-			echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td></tr>";
+			echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td></tr>";
 			$imgCounter=0;
 		}	
 	}	
@@ -114,10 +116,10 @@
 	for($i=0;$i<count($result);$i++){
 	if($imgCounter==0){echo "<tr>";}
 		if($imgCounter!=2){
-	echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td>";
+	echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td>";
 		$imgCounter++;		
 		}elseif($imgCounter==2){
-			echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td></tr>";
+			echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td></tr>";
 			$imgCounter=0;
 		}	
 	}	
