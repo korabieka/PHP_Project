@@ -2,8 +2,8 @@
     class dbconnect{
         static $db;
         static $host = "localhost";
-        static $username = "root";
-        static $password = "1232102512";
+        static $username = "ashour";
+        static $password = "hussien660";
         static $dbname = "CAFETERIA";
         private function __construct(){}
 

@@ -114,10 +114,10 @@
 	for($i=0;$i<count($result);$i++){
 	if($imgCounter==0){echo "<tr>";}
 		if($imgCounter!=2){
-	echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td>";
+	echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl' value='".$result[$i]['price']."'/>"."</figcaption></figure></td>";
 		$imgCounter++;		
 		}elseif($imgCounter==2){
-			echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td></tr>";
+			echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl' value='".$result[$i]['price']."'/>"."</figcaption></figure></td></tr>";
 			$imgCounter=0;
 		}	
 	}	
