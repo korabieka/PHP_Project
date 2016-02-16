@@ -96,9 +96,11 @@
 
 
 	$hpwd = md5($pwd);
-	if($suser)
-		$dbobj->Insert("insert into user values(null,'$uname','$email','$hpwd','$imgname',1,'$ext','$suser','$fname','$lname','$suser')");
-	// else
 
+	if($suser == 'true')
+		$dbobj->Insert("insert into user values(null,'$uname','$email','$hpwd','$imgname',$rid,'$ext',1,'$fname','$lname',0)");
+	else
+		$dbobj->Insert("insert into user values(null,'$uname','$email','$hpwd','$imgname',$rid,'$ext',0,'$fname','$lname',1)");
+		// echo "regular";
 	header("location:".$_user."?uid=".$uid);	    
 ?>1

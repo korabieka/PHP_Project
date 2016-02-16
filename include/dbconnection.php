@@ -39,7 +39,7 @@
         }
 
         function getActiveUsersRecords(){
-            $arr = $this->Select("select `uid`,`uname`,`email`,`imgname`,`rid`,`ext`,`active`,`admin` from `user`");
+            $arr = $this->Select("select `uid`,`uname`,`email`,`imgname`,`rid`,`ext`,`active`,`admin`,`imgname` from `user`");
             $userArr = array();
             foreach ($arr as $row){                
                 if($row['active'])

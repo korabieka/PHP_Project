@@ -34,7 +34,7 @@
     // upload image
 	$target_dir = "../images/product/";
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-	print_r($_FILES["fileToUpload"]);
+	// print_r($_FILES["fileToUpload"]);
 	$uploadOk = 1;
 	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 	$imgname = $pname . "." . $imageFileType;
@@ -69,6 +69,6 @@
 	        exit;
 	    }
 	}
-	$dbobj->Insert("insert into `product` values(null,'$pname','$price','$cid','$imgname',true)");
+	$dbobj->Insert("insert into `product` values(null,'$pname','$price','$cid','$imgname',true,true)");
 	header("location:".$_product."?uid=".$uid);
 ?> 
