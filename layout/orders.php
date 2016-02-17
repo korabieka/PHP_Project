@@ -62,7 +62,8 @@
 	</div>
 	    	<?php
 	    		foreach($processingOrders as $row){
-	    			echo "<div class='container' id='con'>";	
+	    			$oid = $row['oid'];
+	    			echo "<div class='container' id='$oid'>";	
 	    			echo "<table class='table table-bordered table-striped col-md-offset-8 center-table'>";
 				    echo "<thead>";
 				    echo "<tr>";
@@ -81,8 +82,7 @@
 	    			$imgpath = $_users_img.$row['imgname'];
 	    			echo "<td><img src='$imgpath' width='80' heigth='80'></img></td>";
 	    			echo "<td>".$row['ext']."</td>";
-	    			$oid = $row['oid'];
-	    			echo "<td><a href='$_controller/deliver.php?oid=$oid'>Deliver</a></td>";
+	    			echo "<td id='$oid'><a id='$oid' name='ancor' href='$_controller/deliver.php?oid=$oid'>Deliver</a></td>";
 	    			echo "</tbody>";
 					echo "</table>";
 					$imgpath = $_products_img.$row['imgname'];
@@ -96,7 +96,10 @@
 					echo "<tr>";
 					foreach ($processingProducts as $row) {
 						$impath = $_products_img.$row['imgname'];
-						echo "<td><div class ='vertpan pic'><img class='aligncenter' width='80' heigth='80' src='$impath'/></div></td>";		
+						$pname = $row['pname'];
+						$qty = $row['qty'];
+						$price = $row['price'];
+						echo "<td class='inline'><h1>$ $price</h1><div class ='vertpan pic'><figure><img class='aligncenter' width='80' heigth='80' src='$impath'/><figcaption>$pname</figcaption></figure></div><h1>x $qty</h1></td>";		
 					}
 					echo "</tr>";
 					echo "</table>";
@@ -114,5 +117,6 @@
 	<link rel="stylesheet" href="css/ourstyle.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  	<script src="../layout/js/deliver_server.js"></script>
 </body>
 </html>

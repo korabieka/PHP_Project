@@ -19,8 +19,11 @@
 
   	$oid = $_GET['oid'];
 
-  	$flag = 0;
-  	// $dbobj->Update("update `orders` set `processing`=0 where `oid`='$oid'");
+  	$processing = $dbobj->SelectColumn('processing','orders','oid',$oid);
+  	do{
+  		$updated_processing = $dbobj->SelectColumn('processing','orders','oid',$oid);
 
-  	header("location:".$_orders."?uid=".$uid);
+  	}while($processing == $updated_processing);
+
+  	echo 0;
 ?>

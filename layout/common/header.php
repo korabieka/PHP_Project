@@ -2,6 +2,7 @@
   $_home = "ManualOrders.php?";
   $_products = "products.php";
   $_users = "users.php";
+  $_orders = "orders.php";
   $_logout = "../controller/logout.php";
   $_checks = "";
 ?>
@@ -27,6 +28,7 @@
       <li><a href="<?php echo $_home ?>">Home</a></li>
       <li><a href="<?php echo $_products ?>">Products</a></li> 
       <li><a href="<?php echo $_users ?>">Users</a></li>
+      <li><a href="<?php echo $_orders ?>">orders</a></li>
       <li><a href="#">Checks</a></li> 
     </ul>
     <div style="float:right">
