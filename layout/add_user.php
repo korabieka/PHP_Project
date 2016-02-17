@@ -1,11 +1,17 @@
 <?php
 
 	$_user_controller = "../controller/add_user.php";
-	require_once("../include/dbconnection.php");
+	require_once("../include/Validation.php"); // deconnection already included in Validation
 	$dbobj = new dbconnection();
+	$vobj = new Validation();
 	session_start();
 	//$uid = $_GET['uid'];
   	$uid = $_SESSION['uid'];
+  	if(!$vobj->ifSuperUserId($uid)){
+    	echo "You are not authoriezed to enter this page. Only for admins.";
+    	exit;
+    }
+	//$uid = $_GET['uid'];
 	// $categories = $dbobj->SelectColumn('cname','category',null,null);
 	$uname = $dbobj->SelectColumn('uname','user','uid',$uid);
 	$uname = $uname[0];

@@ -1,6 +1,4 @@
 var inputValue = document.getElementById('value');
-var nameLbl = document.getElementById('pLbl');
-var priceLbl = document.getElementById('priceLbl');
 function increment(){
 value.value++;
 }
@@ -13,7 +11,11 @@ value.value--;
 }
 
 $('#drinksTbl img').on('click',function(){
-	$('#orderForm').before("<label>"+nameLbl"</label><input type='text' id='value' value='1' width='20'/><button id='plus' onclick='increment()'>+</button><button id='minus' onclick='decrement()'>-</button><label>"+priceLbl+"</label>");
+/*
+var nameLbl = document.getElementById('pLbl');
+var priceLbl = document.getElementById('priceLbl');
+*/
+$('#orderForm').before("<label>"+$('[id ^= "pLbl"]').val()+"</label><input type='text' id='value' value='1' width='20'/><button id='plus' onclick='increment()'>+</button><button id='minus' onclick='decrement()'>-</button><label>"+$('[id ^= "priceLbl"]').val()+"</label>");
 
 });
 

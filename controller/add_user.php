@@ -97,7 +97,7 @@
 
 	$hpwd = md5($pwd);
 	if($suser)
-		$dbobj->Insert("insert into user values(null,'$uname','$email','$hpwd','$imgname',1,'$ext','$suser','$fname','$lname',true)");
+		$dbobj->Insert("insert into user values(null,'$uname','$email','$hpwd','$imgname',1,'$ext','$suser','$fname','$lname','$suser')");
 	// else
 
 	header("location:".$_user."?uid=".$uid);	    

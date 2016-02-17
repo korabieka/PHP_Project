@@ -3,11 +3,17 @@
   $dbobj = new dbconnection();
   $rooms = $dbobj->SelectColumn('rname','room',null,null);
   session_start();
+  if(!isset($_SESSION['uid'])){
+    echo "You are not authoriezed to enter this page. You have to login first";
+    exit;
+  }
   $uid = $_SESSION['uid'];
   $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
   $uname = $uname[0];
-  $img = "img/users/".$uname.".jpeg";
-  include("common/header.php");
+  $imgname = $dbobj->SelectColumn('imgname','user','uid',$uid);
+  $imgname = $imgname[0];
+  $img = "../images/user/".$imgname;
+  include("common/regheader.php");
 ?>
 <!DOCTYPE html> 
 <html lang="en">
@@ -16,9 +22,6 @@
 	<title>Bootstrap</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<script src="js/jquery-1.11.2.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-  <script src="js/ManualOrders.js"></script>
 </head>
 <body>
 <!--Header-->
@@ -55,7 +58,7 @@
 
   <div class="row">
     <div class="col-lg-5" style="" id="orders"> <!--Div For Orders-->
-        <form role="form" method="" class="form-horizontal">
+        <form role="form" method="" id="orderForm" class="form-horizontal">
 	<!--quantity w kda-->          
 
 	<hr>
@@ -95,10 +98,10 @@
 	for($i=0;$i<count($result);$i++){
 	if($imgCounter==0){echo "<tr>";}
 		if($imgCounter!=2){
-	echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td>";
+	echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td>";
 		$imgCounter++;		
 		}elseif($imgCounter==2){
-			echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td></tr>";
+			echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."</figcaption></figure></td></tr>";
 			$imgCounter=0;
 		}	
 	}	
@@ -107,17 +110,24 @@
       </div>
     <hr>
     <div class="col-lg-12 table-responsive">
-      <table class="table table-striped">
+      <table id="drinksTbl" class="table table-striped">
       <?php
 	$imgCounter=0;
 	$result = $dbobj->Select("select * from product where available=1");
 	for($i=0;$i<count($result);$i++){
 	if($imgCounter==0){echo "<tr>";}
 		if($imgCounter!=2){
-	echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl' value='".$result[$i]['price']."'/>"."</figcaption></figure></td>";
+//<<<<<<< HEAD
+	echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl".$i."' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl".$i."' value='".$result[$i]['price']."'/>"."</figcaption></figure></td>";
 		$imgCounter++;		
 		}elseif($imgCounter==2){
-			echo "<td><figure><img src='img/products/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl' value='".$result[$i]['price']."'/>"."</figcaption></figure></td></tr>";
+			echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl".$i."' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl".$i."' value='".$result[$i]['price']."'/>"."</figcaption></figure></td></tr>";
+//=======
+	echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td>";
+		$imgCounter++;		
+		}elseif($imgCounter==2){
+			echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td></tr>";
+//>>>>>>> 14cc63dc201a0bd1e7fa448add2a9950a4f9c751
 			$imgCounter=0;
 		}	
 	}	
@@ -148,5 +158,8 @@
 <div><h4>Copy rights reserved for Eagles Team</h4></div>
 </div>
 </div> -->
+  <script src="js/jquery-1.11.2.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/userOrders.js"></script>
 </body>
 </html>

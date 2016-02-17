@@ -12,14 +12,13 @@
 	}
 	$uid = $_SESSION['uid'];
     if(!$vobj->ifSuperUserId($uid)){
-    	echo $uid."<br>";
     	echo "You are not authoriezed to enter this page. Only for admins.";
     	exit;
     }
     $_products_img = "../images/product/";
     $_users_img = "../images/user/";
 
-    $productsArr = $dbobj->Select("select `pid`,`pname`,`price`,`imgname`,`available` from `product`");
+    $productsArr = $dbobj->getActiveProductsRecords();
 
     $_controller = "../controller/";
     $_layout = "../layout/";
