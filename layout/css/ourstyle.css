@@ -24,3 +24,7 @@ width: 90px;
 	outline: 1px solid gray;
 
 }
+
+figcaption { 
+    display: block;
+}
