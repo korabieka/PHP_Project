@@ -118,16 +118,11 @@
 	if($imgCounter==0){echo "<tr>";}
 		if($imgCounter!=2){
 //<<<<<<< HEAD
-	echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl".$i."' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl".$i."' value='".$result[$i]['price']."'/>"."</figcaption></figure></td>";
+	echo "<td><figure><img class='pimage' src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl".$i."' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl".$i."' value='".$result[$i]['price']."'/>"."</figcaption></figure></td>";
 		$imgCounter++;		
 		}elseif($imgCounter==2){
-			echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl".$i."' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl".$i."' value='".$result[$i]['price']."'/>"."</figcaption></figure></td></tr>";
+			echo "<td><figure><img class='pimage' src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."<input type='hidden' id='pLbl".$i."' value='".$result[$i]['pname']."'/>"."-".$result[$i]['price']."<input type='hidden' id='priceLbl".$i."' value='".$result[$i]['price']."'/>"."</figcaption></figure></td></tr>";
 //=======
-	echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td>";
-		$imgCounter++;		
-		}elseif($imgCounter==2){
-			echo "<td><figure><img src='../images/product/".$result[$i]['imgname']."' width='200px' height='200px'/><figcaption align='center'>".$result[$i]['pname']."-".$result[$i]['price']."</figcaption></figure></td></tr>";
-//>>>>>>> 14cc63dc201a0bd1e7fa448add2a9950a4f9c751
 			$imgCounter=0;
 		}	
 	}	

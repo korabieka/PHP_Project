@@ -10,12 +10,16 @@ value.value--;
 }
 }
 
-$('#drinksTbl img').on('click',function(){
+for(var i=0 ; i<$('.pimage').length;i++){
+var x = $('.pimage').get(i);
+$(x).on('click',function(e){
 /*
 var nameLbl = document.getElementById('pLbl');
 var priceLbl = document.getElementById('priceLbl');
-*/
-$('#orderForm').before("<label>"+$('[id ^= "pLbl"]').val()+"</label><input type='text' id='value' value='1' width='20'/><button id='plus' onclick='increment()'>+</button><button id='minus' onclick='decrement()'>-</button><label>"+$('[id ^= "priceLbl"]').val()+"</label>");
+*/var y = $(e.target).next().children().get(0);
+var z = $(e.target).next().children().get(1);
+$('#orderForm').before("<label>"+$(y).val()+"</label><input type='text' id='value' value='1' width='20'/><button id='plus' onclick='increment()'>+</button><button id='minus' onclick='decrement()'>-</button><label>"+$(z).val()+"</label><br>");
 
 });
 
+}
