@@ -63,7 +63,7 @@
 
 	<hr>
       <div class="form-group">
-        <label class="control-label col-sm-2" for="notes">Notes</label>
+        <label id="notes" class="control-label col-sm-2" for="notes">Notes</label>
         </div>
         <div class="form-group">
           <textarea class="form-control"></textarea>
@@ -76,7 +76,7 @@
         </div>
         <hr>
         <div class="form-group">
-        <label class="control-label col-sm-offset-10 col-sm-2" for="price">Price</label>
+        <label id="totalPrice" class="control-label col-sm-offset-10 col-sm-2" for="price">0 EGP</label>
         </div>
         <br>
         <div class="form-group">
