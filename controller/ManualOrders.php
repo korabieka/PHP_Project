@@ -4,6 +4,7 @@ session_start();
 $notes = $_POST['notes'];
 $room = $_POST['rooms'];
 $total = $_POST['total'];
+$user = $_POST['user'];
 //echo $_POST['mokka'];
 
 $dbobj = new dbconnection();
@@ -23,7 +24,8 @@ for($i=0 ; $i<count($arr) ; $i++){
 	}
 }
 //print_r($product);
-$dbobj->Insert("insert into orders (uid,odate,notes,processing,totalamount,otime) values('".$_SESSION['uid']."',CURDATE(),'".$notes."',1,'".$total."',CURTIME())");
+$res = $dbobj->Select("select uid from user where uname='".$user."'");
+$dbobj->Insert("insert into orders (uid,odate,notes,processing,totalamount,otime) values('".$res[0]['uid']."',CURDATE(),'".$notes."',1,'".$total."',CURTIME())");
 foreach ($product as $key => $value) {
 $arr = $dbobj->Select("select pid,price from product where pname = '".$key."'");
 $arr2 = $dbobj->Select("select oid from orders order by oid desc limit 1");
@@ -31,6 +33,6 @@ $arr2 = $dbobj->Select("select oid from orders order by oid desc limit 1");
  echo $arr[0]['pid'];
  $dbobj->Insert("insert into order_detail (oid,pid,qty,pamount) values('".$arr2[0]['oid']."','".$arr[0]['pid']."','".$value."','".$arr[0]['price']."')");   
 }
-header('location: ../layout/My_Orders.php');
+header('location: ../layout/ManualOrders.php');
 
 ?>
