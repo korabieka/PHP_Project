@@ -13,6 +13,7 @@
     }
 	//$uid = $_GET['uid'];
 	// $categories = $dbobj->SelectColumn('cname','category',null,null);
+	$rooms = $dbobj->SelectColumn('rname','room',null,null);
 	$uname = $dbobj->SelectColumn('uname','user','uid',$uid);
 	$uname = $uname[0];
 	$img = "img/users/".$uname.".jpeg";
@@ -61,8 +62,10 @@
 	            <input name="cpwd" class="col-md-10" type="password" class="form-control" id="cpwd" placeholder="Confirm Password">
 	        </div>
 	        <div class="form-group">
-	            <label class="col-md-2" for="pwd">Room number :</label>
-	            <input name="rnum" class="col-md-10" type="text" class="form-control" id="rnum" placeholder="Enter your room number">
+	            <label class="col-md-2" for="pwd">Room number :</label>	            
+		        <select name="rnum" class="col-md-10">
+		          <?php foreach($rooms as $room) echo "<option value='$room'>$room </option>"?>
+		        </select>
 	        </div>
 	        <div class="form-group">
 	            <label class="col-md-2" for="pwd">Ext. :</label>

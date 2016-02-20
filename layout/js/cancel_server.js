@@ -1,7 +1,7 @@
 $(function(){
 	var url = "../../controller/deliver_server.php";
 	var lastModified = 0;
-	var uid;
+	var oid;
 	$("a[name=ancor]").click(function(e){
 		oid = $(this).attr("id");
 		$.ajax({

@@ -63,6 +63,7 @@
 	    	<?php
 	    		foreach($processingOrders as $row){
 	    			$oid = $row['oid'];
+	    			$uid = $row['uid'];
 	    			echo "<div class='container' id='$oid'>";	
 	    			echo "<table class='table table-bordered table-striped col-md-offset-8 center-table'>";
 				    echo "<thead>";
@@ -82,7 +83,7 @@
 	    			$imgpath = $_users_img.$row['imgname'];
 	    			echo "<td><img src='$imgpath' width='80' heigth='80'></img></td>";
 	    			echo "<td>".$row['ext']."</td>";
-	    			echo "<td id='$oid'><a id='$oid' name='ancor' href='$_controller/deliver.php?oid=$oid'>Deliver</a></td>";
+	    			echo "<td id='$oid'><a id='$oid' uid='$uid' name='ancor' href='$_controller/deliver.php?oid=$oid'>Deliver</a></td>";
 	    			echo "</tbody>";
 					echo "</table>";
 					$imgpath = $_products_img.$row['imgname'];
