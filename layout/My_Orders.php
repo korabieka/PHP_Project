@@ -70,17 +70,25 @@ var myOrders;
 var total;
 //------------------- show order details -------------
 function show_details(oid){
-	//------------------- Adjust functionality -------------
-	$("#ordersId").find("tr#"+oid).find("a#1").text(" - ");
-	$("#ordersId").find("tr#"+oid).find("a#1").click(function(){
-		$("#order_details").find("tr").remove();
-	});
-	//-------------------
-	$("#order_details").find("tr").remove();	
+	var counter=0;
 	var mytr="";
 	var imgsrc;
-	mytr='<tr>';
+	var myOid= oid;
+	//------------------- Adjust functionality -------------
+	if ($("#ordersId").find("tr#"+oid).find("a#1").text() == " - "){
+		$("#order_details").find("tr").remove();
+		$("#ordersId").find("tr#"+oid).find("a#1").text(" + ");
+	}
+	else{
+		$("#ordersId").find("tr#"+oid).find("a#1").text(" - ");
+
+	//-------------------
+	$("#order_details").find("tr").remove();	
+	
+	//mytr='<tr>';
 	for(var i=0; i<orders_details.length; i++ ){
+		if(counter%4 == 0)
+			mytr+='<tr>';
 		if(orders_details[i].oid == oid){
 			mytr += '<td>'+orders_details[i].price+' EGP'+'<br>';
 			imgsrc = "../images/product/"+orders_details[i].imgname;
@@ -91,10 +99,12 @@ function show_details(oid){
 
 			mytr +='</td>';
 		}
-		console.log(orders_details[i].oid);	
+		counter++;
+		
 	}
 	mytr+='</tr>';
 	$('#order_details').append( mytr );
+	}
 }
 //--------------------------Show Orders -----------------------
 function show_order(ordersArr){
@@ -103,6 +113,7 @@ function show_order(ordersArr){
 			var processing;
 			var mytr ;
 			// --- not to append on old query results
+			$("#order_details").find("tr").remove();
 			$("#ordersId").find("tr:gt(0)").remove();
 			//-- for loop to create table -- 
 			for ( var i = 0; i < ordersArr.length; i++ ) {
