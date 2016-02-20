@@ -8,45 +8,48 @@ var z = $(e.target).next().children().get(1);
 if($(".drink:contains('"+$(y).val()+"')").length !=0){
 $(".drink:contains('"+$(y).val()+"')").next()[0].value = parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value)+1;
  val = parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value) * $(z).val();
+oldVal = val;
 $(".drink:contains('"+$(y).val()+"')").next().next().text(val + " EGP");
- total += parseInt($(z).val());
- console.log(total);
- //$('#oldTotal').val(val);
+$('.qty').val(parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value));
+total += parseInt($(z).val());
+$('#totalPrice').text(total+" EGP");
+$('#hiddenTotal').val(total);
+/*
 $(".drink:contains('"+$(y).val()+"')").next().on('change',function(){
  val = parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value) * $(z).val();
- if(val>parseInt($('#oldTotal').val())){
- total += parseInt($(z).val());
- console.log(total);
- $('#oldTotal').val(val);
- }else{
-total -= parseInt($(z).val());
-console.log(total); 
-$('#oldTotal').val(val);
- }
 $(".drink:contains('"+$(y).val()+"')").next().next().text(val+" EGP");
-});
-}else{
-$('#notes').before("<label class='drink'>"+$(y).val()+"</label class='control-label'><input type='number' id='value' value='1' width='20'/><label class='control-label price'>"+$(z).val()+" EGP</label><input type='hidden' id='oldTotal' value='"+total+"' width='20'/><br>");
-val = parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value) * $(z).val();
- total += parseInt($(z).val());
- console.log(total);
-//$('#oldTotal').val(val);
+total += parseInt($(z).val());
+$('#totalPrice').text(total+" EGP");
 
+});*/
+}else{
+$('#notes').before("<label class='drink'>"+$(y).val()+"</label class='control-label'><input type='number' name='"+$(y).val()+"' class='value' value='1' width='20' min='1'/><label class='control-label price'>"+$(z).val()+" EGP</label><br>");
+val = parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value) * $(z).val();
+var oldVal = val;
+$(".drink:contains('"+$(y).val()+"')").next().next().text(val+" EGP");
+$('.qty').val(parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value));
+total += parseInt($(z).val());
+$('#totalPrice').text(total+" EGP");
+$('#hiddenTotal').val(total);
 $(".drink:contains('"+$(y).val()+"')").next().on('change',function(){
 val = parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value) * $(z).val();
- //total += parseInt($(z).val());
- //console.log(total);
-$(".drink:contains('"+$(y).val()+"')").next().next().text(val+" EGP");
-if(val>parseInt($('#oldTotal').val())){
- total += parseInt($(z).val());
- console.log(total);
- $('#oldTotal').val(total);
- }else{
-total -= parseInt($(z).val());
-console.log(total); 
-$('#oldTotal').val(total);
+ $(".drink:contains('"+$(y).val()+"')").next().next().text(val+" EGP");
+ $('.qty').val(parseInt($(".drink:contains('"+$(y).val()+"')").next()[0].value));
+ 
+ if(val > oldVal){
+total += parseInt($(z).val());
+$('#totalPrice').text(total+" EGP");
+$('#hiddenTotal').val(total);
+}else if(val == oldVal){
+total = parseInt($(z).val());
+$('#totalPrice').text(total+" EGP");
+$('#hiddenTotal').val(total);
 }
-$(".drink:contains('"+$(y).val()+"')").next().next().text(val+" EGP");
+else{
+total -= parseInt($(z).val());
+$('#totalPrice').text(total+" EGP");
+$('#hiddenTotal').val(total);
+}
 });
 }
 });

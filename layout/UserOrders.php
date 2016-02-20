@@ -58,25 +58,25 @@
 
   <div class="row">
     <div class="col-lg-5" style="" id="orders"> <!--Div For Orders-->
-        <form role="form" method="" id="orderForm" class="form-horizontal">
+        <form role="form" method="post" action="../controller/UserOrders.php" id="orderForm" class="form-horizontal">
 	<!--quantity w kda-->          
-
 	<hr>
       <div class="form-group">
         <label id="notes" class="control-label col-sm-2" for="notes">Notes</label>
         </div>
         <div class="form-group">
-          <textarea class="form-control"></textarea>
+          <textarea class="form-control" name="notes"></textarea>
         </div>
         <div class="form-group">
         <label class="control-label col-sm-2" for="room">Room</label>
-        <select class="form-control col-sm-10">
+        <select class="form-control col-sm-10" name="rooms">
           <?php foreach($rooms as $room) echo "<option value='$room'>$room </option>"?>
         </select>
         </div>
         <hr>
         <div class="form-group">
         <label id="totalPrice" class="control-label col-sm-offset-10 col-sm-2" for="price">0 EGP</label>
+        <input type="hidden" name="total" id="hiddenTotal" value=""/>
         </div>
         <br>
         <div class="form-group">
