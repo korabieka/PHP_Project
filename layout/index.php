@@ -37,7 +37,7 @@
         </div>
         <input type="hidden" name="direction" value="login"/>
         <input type="submit" class="col-md-offset-2 btn btn-default" value="Submit"/>
-        <a href="#">Forget Password?</a>
+        <a href="forgetPassword.php">Forget Password?</a>
         
 
     </form>
