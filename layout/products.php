@@ -65,7 +65,7 @@
 	    			echo "<td>".$row['price']."</td>";
 	    			$imgpath = $_products_img.$row['imgname'];
 	    			$pid = $row['pid'];
-	    			echo "<td><img src='$imgpath' width='40' heigth='40'></img></td>";
+	    			echo "<td><img class='img-circle' src='$imgpath' width='80' heigth='80'></img></td>";
 	    			echo "<td><a href='$_controller/toggle_avb.php?pid=$pid'>".$avb."</a>&nbsp;|&nbsp;<a href='$_layout/edit_product.php?pid=$pid'>Edit</a>&nbsp;|&nbsp;<a href='$_controller/delete_product.php?pid=$pid'>Delete</a></td>";
 	    		}
 	    	?>

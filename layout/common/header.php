@@ -33,7 +33,7 @@
     </ul>
     <div style="float:right">
     <ul class="nav navbar-nav">
-    <li><img src="<?php echo $img ?>" width="60px" height="50px"/></li>
+    <li><img class="img-circle" src="<?php echo $img ?>" width="60px" height="50px"/></li>
     <li><a href="#"><?php echo $uname ?></a></li>
     <li><a href="<?php echo $_logout ?>" >Logout</a></li>
     

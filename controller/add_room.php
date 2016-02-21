@@ -16,13 +16,14 @@
     	echo "You are not authoriezed to enter this page. Only for admins.";
     	exit;
     }
-    if(!isset($_POST['cname'])){
-        echo "Please enter the category name";
+    if(!isset($_POST['rname'])){
+        echo "Please enter the room name";
+        exit;
     }
-	$_product = "../layout/add_product.php";
-$category = $_POST['cname'];
-$dbobj->Insert("insert into category (cname) values('".$category."')");
-header("location:".$_product."?uid=".$uid);
+	$_product = "../layout/add_user.php";
+    $rname = $_POST['rname'];
+    $dbobj->Insert("insert into `room` values(null,'$rname')");
+    header("location:".$_product."?uid=".$uid);
 
 
 

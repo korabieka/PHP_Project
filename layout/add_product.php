@@ -47,19 +47,19 @@
 	            <label class="col-md-2">Product price :</label>
 	            <input class="col-md-10" type="number" min="0"class="form-control" id="price" name="price" placeholder="Enter product price">
 	        </div>
-	        <div class="form-group">
+	        <div class="form-group row">
 	            <label class="col-md-2" for="username">Product category :</label>
-	            <select name="category" class="col-md-10">
+	            <select name="category" class="col-md-6">
 	            	<?php foreach($categories as $category) echo "<option value='$category'>$category </option>" ?>
 	            </select>
-	            <a href="addCategory.php">Add Category </a>
+	            <div class="col-md-2"><a href="addCategory.php">Add Category </a></div>
 	        </div>
 	        <div class="form-group">
 		        <label class="col-md-2" for="">Product image :</label>
 		        <input class="col-md-10" type="file" name="fileToUpload" id="fileToUpload">
 		    </div>
 		    <br>
-		    <div class="col-md-offset-2 row">
+		    <div class="col-md-offset-2">
 	        	<input type="submit" class="col-md-offet-2 btn btn-success" value="Submit">
 	        	<input type="reset" class="col-md-offset-2 btn btn-danger" value="reset">
 	        </div>
