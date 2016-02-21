@@ -7,6 +7,7 @@ if(!isset($_POST['username'])){
 echo "please back and enter the user name";
 exit;
 }
+$_SESSION['username'] = $_POST['username'];
 $arr = $dbobj->SelectColumn("email","user","uname",$_POST['username']);
 if(count($arr) == 0){
 echo "User Name is not exist";
@@ -21,7 +22,7 @@ $seed = str_split('abcdefghijklmnopqrstuvwxyz'
 							foreach (array_rand($seed, 5) as $k) $rand .= $seed[$k];
 $check = mail($email,"Confirmation Code is here",$rand,'admin@cafeteria.com');
 echo $check;
-
+echo $rand;
 if(!$check){
 echo "lol";
 exit;
@@ -48,9 +49,9 @@ echo "message sent successfully";
         </div>
     </div>
 </div>
-<form method="post" action="#">
+<form method="post" action="../controller/passwordRecovery.php">
 <label>Confirmation Code</label>
-<input type="text" name="userCode" value=""/>
+<input type="text" name="userCode" value="" required/>
 <input type="hidden" name="code" value="<?php echo $rand; ?>"/>
 </br>
 <input type="submit" value="Confirm"/>
