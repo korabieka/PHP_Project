@@ -10,7 +10,16 @@
   }
   $uid = $_SESSION['uid'];
   // $_SESSION['uid'] = $uid;
-  $users = $dbobj->SelectColumn('uname','user',null,null);
+
+  $activeusersArr = $dbobj->Select('select * from user,room where user.rid=room.rid');
+
+  $users = array();
+  foreach ($activeusersArr as $row) {
+    if(!$row['admin'])
+      array_push($users, $row['uname']);
+  }
+
+  // $users = $dbobj->SelectColumn('uname','user',null,null);
   $rooms = $dbobj->SelectColumn('rname','room',null,null);
   $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
   $uname = $uname[0];

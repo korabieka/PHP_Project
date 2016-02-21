@@ -1,4 +1,34 @@
+<?php
+	error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    // require_once("../include/dbconnection.php");
+    require_once("../include/Validation.php"); // deconnection already included in Validation
+	$dbobj = new dbconnection();
+	$vobj = new Validation();
 
+    session_start();
+    if(!isset($_SESSION['uid'])){
+		echo "You are not authoriezed to enter this page. You have to login first";
+		exit;
+	}
+    $uid = $_SESSION['uid'];
+
+    $_users_img = "../images/user/";
+
+    
+    $uname = $dbobj->SelectColumn('uname','user','uid',$uid);
+	$uname = $uname[0];
+
+	$imgname = $dbobj->SelectColumn('imgname','user','uid',$uid);
+	$imgname = $imgname[0];
+
+    $_controller = "../controller";
+    $_layout = "../layout";
+    $_add_user = "../layout/add_user.php";	
+	$img = $_users_img.$imgname;
+
+    include("common/regheader.php");
+?>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -19,16 +49,24 @@
 	
 	<div class="row">
 	 <form>
-	  From Date:<br>
-	  <input type="text" name='fdate' id='fdate'><br>
-	  To Date:<br>
-	  <input type="text" name='tdate' id='tdate'><br><br>
-	  <input type="button" value="Show Orders" onclick="getOrders();" />
+	  <!--start-->
+				<div class="row">
+					<div class="col-md-4"><h4>From Date:</h4></div>
+					<div class="col-md-4"><h4>To Date:</h4></div>
+				</div>	
+				<!--end-->
+				<!--start-->
+				<div class="row">
+				<div class="col-md-4"><input type="text" class="datepicker" id='fdate' placeholder="From Date" data-date-format="yyyy/mm/dd"></div>
+							<div class="col-md-4"><input type="text" class="datepicker" id='tdate' placeholder="To Date" data-date-format="yyyy/mm/dd"></div>
+						</div>
+		
+	  <br><input type="button" value="Show Orders" onclick="getOrders();" />
 	 </form> 
-	</div>
+	</div><br>
        
 			<?php	
-			echo "<div class='row'>";
+			echo "<div class='col-md-12'>";
 			echo "<table id=ordersId class='table table-bordered table-striped col-md-offset-8 center-table'>";
 
 			echo "<thead>";
@@ -60,7 +98,12 @@
 	<link rel="stylesheet" href="css/ourstyle.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  	<script src="../layout/js/deliver_server.js"></script>
+  	<!-- // <script src="../layout/js/deliver_server.js"></script> -->
+	<script src="js/bootstrap-datepicker.js"></script>
+	
+	<script>
+		$('.datepicker').datepicker();
+	 </script>
 	<script>
 	
 
@@ -107,6 +150,31 @@ function show_details(oid){
 	}
 }
 //--------------------------Show Orders -----------------------
+function DeliveryServer(){
+	var url = "../controller/deliver_server.php";
+	var oid;
+	// uid = $(this).attr('uid');
+	var uid = 19;
+	var xhr = $.ajax({
+		url:url,
+		method:'post',
+		data:{
+			"uid":uid
+		},
+		success:function(response){
+			$('td[id='+response.oid+']').text("Out fooor Dilevry");
+			console.log("dfghjkl");
+		},
+		error:function(ayaad,status,error){
+			console.log("error");
+		},
+		complete:function(ayaad){
+			console.log("completed");	
+		},
+		dataType:'json'
+	});
+	xhr.abort();
+}
 function show_order(ordersArr){
 			total=0;
 			var action="";
@@ -140,12 +208,13 @@ function show_order(ordersArr){
 			total+= parseInt(ordersArr[i].totalamount);
 			}/////// end foor loop
 			$('#totalVal').text('EGP '+total);
+			// DeliveryServer();
 		}
 
 //-------------------------Get Orders -------------------------
 		
 		function getOrders(){
-    			var v_fdate = $("#fdate").val();
+    		var v_fdate = $("#fdate").val();
 			var v_tdate  = $("#tdate").val();
 			$.ajax({
 				url:"get_orders.php",
