@@ -4,7 +4,7 @@
   $_users = "users.php";
   $_orders = "orders.php";
   $_logout = "../controller/logout.php";
-  $_checks = "";
+  $_checks = "Checks.php";
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
       <li><a href="<?php echo $_products ?>">Products</a></li> 
       <li><a href="<?php echo $_users ?>">Users</a></li>
       <li><a href="<?php echo $_orders ?>">orders</a></li>
-      <li><a href="#">Checks</a></li> 
+      <li><a href="<?php echo $_checks ?>">Checks</a></li> 
     </ul>
     <div style="float:right">
     <ul class="nav navbar-nav">

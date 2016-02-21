@@ -1,27 +1,23 @@
 $(function(){
-	var url = "../../controller/deliver_server.php";
-	var lastModified = 0;
-	var oid;
-	$("a[name=ancor]").click(function(e){
-		oid = $(this).attr("id");
-		$.ajax({
+		function getCancelOrder(){
+			var url = "../controller/cancel_server.php";
+			$.ajax({
 			url:url,
 			method:'post',
 			data:{
-				"oid":oid
 			},
 			success:function(response){
-							
+				$('.container[id='+response.oid+']').hide();
+				getCancelOrder();
 			},
-			error:function(ayaad,status,error){
-				
+			error:function(err,status,error){
+				console.log(error);
 			},
-			complete:function(ayaad){
-				
+			complete:function(complete){
 			},
-
+			dataType:'json'
 		});
-	});
-	
 
+	}
+	getCancelOrder();
 });

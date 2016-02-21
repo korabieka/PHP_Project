@@ -1,27 +1,25 @@
 $(function(){
-	var url = "../../controller/deliver_server.php";
-	var lastModified = 0;
-	var uid;
-	$("a[name=ancor]").click(function(e){
-		oid = $(this).attr("id");
+	function getDeliverdOrder(){
+		var url = "../controller/deliver_server.php";
 		$.ajax({
 			url:url,
 			method:'post',
 			data:{
-				"oid":oid
 			},
 			success:function(response){
-							
+				console.log(response);
+				// $('td[id='+response.oid+']').text("Out For Delivery");
+				getDeliverdOrder();
 			},
-			error:function(ayaad,status,error){
-				
+			error:function(err,status,error){
+				console.log(error);
 			},
-			complete:function(ayaad){
-				
+			complete:function(complete){
+				console.log("complete");
 			},
-
+			dataType:'json'
 		});
-	});
-	
 
+	}
+	getDeliverdOrder();
 });

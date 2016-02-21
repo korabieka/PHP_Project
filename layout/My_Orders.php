@@ -94,11 +94,11 @@
 		</table>
 	</div>
 <!---->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/ourstyle.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  	<!-- // <script src="../layout/js/deliver_server.js"></script> -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/ourstyle.css">
+<script src="js/jquery-1.11.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- <script src="../layout/js/deliver_server.js"></script> -->
 	<script src="js/bootstrap-datepicker.js"></script>
 	
 	<script>
@@ -150,31 +150,28 @@ function show_details(oid){
 	}
 }
 //--------------------------Show Orders -----------------------
-function DeliveryServer(){
-	var url = "../controller/deliver_server.php";
-	var oid;
-	// uid = $(this).attr('uid');
-	var uid = 19;
-	var xhr = $.ajax({
-		url:url,
-		method:'post',
-		data:{
-			"uid":uid
-		},
-		success:function(response){
-			$('td[id='+response.oid+']').text("Out fooor Dilevry");
-			console.log("dfghjkl");
-		},
-		error:function(ayaad,status,error){
-			console.log("error");
-		},
-		complete:function(ayaad){
-			console.log("completed");	
-		},
-		dataType:'json'
-	});
-	xhr.abort();
-}
+function getDeliverdOrder(){
+		var url = "../controller/deliver_server.php";
+		$.ajax({
+			url:url,
+			method:'post',
+			data:{
+			},
+			success:function(response){
+				console.log(response);
+				$('td[id='+response.oid+']').text("Out For Delivery");
+				getDeliverdOrder();
+			},
+			error:function(err,status,error){
+				console.log(error);
+			},
+			complete:function(complete){
+				console.log("complete");
+			},
+			dataType:'json'
+		});
+
+	}
 function show_order(ordersArr){
 			total=0;
 			var action="";
@@ -201,14 +198,14 @@ function show_order(ordersArr){
 			mytr += '<tr id='+oid+'>';
 			mytr +='<td width="40%">' +odate+" "+ordersArr[i].otime ;
 			mytr +='<a id=1 onclick=show_details('+oid+');>'+' + '+'</a>'+'</td>'; // details click
-			mytr+='<td>' + processing + '</td>';
+			mytr+='<td id='+oid+'>' + processing + '</td>';
 			mytr+='<td>' + ordersArr[i].totalamount +' EGP</td>'+'<td>' + action + '</td>';
 			mytr+='</tr>';
 			$('#ordersId').append( mytr );
 			total+= parseInt(ordersArr[i].totalamount);
 			}/////// end foor loop
 			$('#totalVal').text('EGP '+total);
-			// DeliveryServer();
+			getDeliverdOrder();
 		}
 
 //-------------------------Get Orders -------------------------

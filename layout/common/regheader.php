@@ -1,7 +1,7 @@
 <?php
   $_home = "UserOrders.php";
   $_logout = "../controller/logout.php";
-  // $_orders = "ManualOrders.php?";
+  $_orders = "My_Orders.php?";
   $_checks = "";
 ?>
 
@@ -24,7 +24,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="<?php echo $_home ?>">Home</a></li>
-      <!-- <li><a href="<?php echo $_orders ?>">Manual Orders</a></li> -->
+      <li><a href="<?php echo $_orders ?>">My Orders</a></li>
     </ul>
     <div style="float:right">
     <ul class="nav navbar-nav img-responsive">
